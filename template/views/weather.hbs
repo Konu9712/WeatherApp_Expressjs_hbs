@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!------ Icon----->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+ 
+    
+    <title>Weather APP</title>
+  </head>
+  <body>
+        {{>header}}
+<!-- End- Navbar -->
+
+<div class="container-fluid main_menu ">
+    <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+            
+            <div class="container main_content">
+                <form class="form mx-auto" id="form">
+                  <div class="row justify-content-md-center">
+                    <input type="text" class="col-7 col-md-5 " placeholder="Enter City Name" id="cityname">
+                    <button type="submit" class=" btn btn-outline-primary col-4 col-md-2" value="search" id="submitBtn">Search</button>
+                   </div> 
+                </form>
+            </div>
+        <div class="main_card mx-auto col-12 col-md-6">
+            <div class="tempInformation ">
+                <div class="top_layer card-header  mr-auto " >
+                    <div class="row">
+                        <p id="day" class="col-6 text-center">Friday</p>
+                        <p id="today_day" class="col-6 text-center text-justify">16 July</p>
+                    </div>
+                </div>
+                
+                <div class="main_layer ">
+                    <p id="city_name"></p>
+                    <div class="middle_layer data_hide row mr-auto  justify-content-around">
+                        <div  class="col-6 text-center">
+                             <p id="temp"> <span></span></p>
+                        </div>
+                       
+                        <p id="temp_status" class="col-6 text-center"> <i class="{{weather}}"></i></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div> 
+        </div>    
+    </div>
+</div>
+
+
+{{>footer}}
+<script type="text/javascript">
+
+
+const curDate = document.getElementById("today_day");
+const day = document.getElementById("day");
+
+const getCurrentDay = ()=>{
+
+            var weekday = new Array(7);
+                    weekday[0] = "Sun";
+                    weekday[1] = "Mon";
+                    weekday[2] = "Tue";
+                    weekday[3] = "Wed";
+                    weekday[4] = "Thu";
+                    weekday[5] = "Fri";
+                    weekday[6] = "Sat";
+
+            let  currentTime = new Date();
+            let day = weekday[currentTime.getDay()];
+            return day;
+
+        };
+
+        const getCurrentTime = ()=>{
+
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sept",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+            var now = new Date();
+            var month = months[now.getMonth()+1];
+            var date = now.getDate();
+
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+            
+            let periods = "AM";
+            if(hours>11){
+                periods="PM";
+                if(hours>12) hours -=12;
+            }
+            if(mins < 10){
+                mins = "0" + mins; 
+            }
+
+            return `${month} ${date} `;
+            console.log(month+ " / "+day);
+        }
+       curDate.innerHTML =  getCurrentTime();
+        day.innerHTML = getCurrentDay();
+
+
+
+
+</script>
+<script  type="text/javascript" src="js/main.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
